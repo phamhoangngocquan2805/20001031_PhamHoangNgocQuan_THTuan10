@@ -1,29 +1,27 @@
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
+import { RecoilRoot } from 'recoil';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from './Home'
-import InforScreen from './InforScreen'
-import JobScreen from './JobScreen'
-const Stack = createStackNavigator();
-const MyContext = createContext();
-const App = () => {
-  const value = {name:'Nhu Tam', age: 21}
-  return (
-    <NavigationContainer>
-      
-    <MyContext.Provider value={value}>
-      <Stack.Navigator
-        screenOptions={{ 
-        headerShown: false, 
-                }}
-        >
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="InforScreen" component={InforScreen} />
-        <Stack.Screen name="JobScreen" component={JobScreen} />
-      </Stack.Navigator>
-    </MyContext.Provider>
-    </NavigationContainer>
-    
-)}
-export default App;
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Start from './components/Start';
+import Home from './components/Home';
+import Additem from './components/Additem';
 
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <RecoilRoot>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Start"
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Start" component={Start} />
+          <Stack.Screen name="Additem" component={Additem} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
+  );
+}
